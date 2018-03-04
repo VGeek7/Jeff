@@ -1,1 +1,13 @@
 **第 0000 题：**将你的 QQ 头像（或者微博头像）右上角加上红色的数字，类似于微信未读信息数量那种提示效果。 类似于图中效果
+
+代码如下:
+import random
+from PIL import Image,ImageDraw,ImageFont
+
+Wechat_image=Image.open('D:/Python code/weChat_avatar.png')#打开该图片
+width,height=Wechat_image.size#获得图片的宽和高
+draw_blank=ImageDraw.Draw(Wechat_image)#对头像图片进行绘画
+font_up_right=ImageFont.truetype('C:/Windows/Fonts/simsunb.ttf',24)#创建字体格式
+text = str(random.randint(1,99))#随机给出右上角数字
+draw_blank.text([width-24,0],text,'#ff0000',font=font_up_right)#在头像图片的右上角绘画一个设定好字体格式的随机红色(#ff0000)数字
+Wechat_image.save('python.png','PNG')#把绘画完的图片储存在当前路径下
