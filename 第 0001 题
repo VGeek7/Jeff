@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import random,string
+chars=string.ascii_letters+string.digits
+def random_string(num,length):
+    sql_code=[]
+    for i in range(int(num)):
+        random_code=[random.choice(chars) for j in range(int(length))]
+        sql_code.append(''.join(random_code))
+    return sql_code
+num=input('How many random codes do you need:')
+length=input('How long do you need the random code:')
+sql=random_string(num,length)
+print(sql)
