@@ -1,0 +1,24 @@
+import mysql.connector
+import random,string
+chars=string.ascii_letters+string.digits
+def random_string(num,length):
+    sql_code=[]
+    for i in range(int(num)):
+        random_code=[random.choice(chars) for j in range(int(length))]
+        sql_code.append(''.join(random_code))
+    return sql_code
+sql=random_string(200,8)#生成200个8位激活码
+conn=mysql.connector.connect(user='root',password='huang123',database='test')
+cursor=conn.cursor()
+cursor.execute('create table code (id varchar(10) primary key, code varchar(10))')
+for i in range(0,200):
+    cursor.execute('insert into code (id,code) values (%s,%s)',(i+1,sql[i]))
+conn.commit()
+cursor.close()
+cursor=conn.cursor()
+cursor.execute('select * from code ')
+print(cursor.fetchall())
+cursor.close()
+conn.close()
+
+数据库插入了，但是顺序是乱序？搞半天没懂，似乎是python2和python3的问题？
